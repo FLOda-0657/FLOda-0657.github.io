@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>info</title>
+</head>
+<style>
+  body {
+    background: black;
+  }
+  
+  .title {
+    background: turquoise;
+    display: flex;
+    justify-content: center;
+    box-shadow: 2px 4px 22px 8px rgba(36,255,247,0.75);
+  }
+  
+  .toggle-btn {
+    display: inline-block;
+    cursor: pointer;
+    color: turquoise;
+  }
+  
+  .toggle-btn .content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    color: turquoise;
+  }
+  
+  .toggle-btn input:checked + span + .content {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .inhalt {
+    color: turquoise;
+    margin-top: 50px;
+  }
+  
+  img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .index {
+    background: turquoise;
+    color: black;
+    box-shadow: 2px 4px 22px 8px rgba(36,255,247,0.75);
+  }
+</style>
+<img src="https://i.ibb.co/JjW81LBW/IMG-20250709-WA0002.jpg" height="400">
+<h1 class="title"><em><u>Infórmációk FLOda-rol:</u></em></h1>
+<h3 class="inhalt">(Katincs a Szöveg-re)</h3>
+<label class="toggle-btn">
+  <input type="checkbox" hidden>
+  <span>A FLOda-ban ezt tutod chinálni:</span>
+  
+  <div class="content">
+    <p>A FLOda-ban a következőket teheti:</p>
+    <ul>
+      <li>Játék...</li>
+      <li>Óra...</li>
+      <li>Timer...</li>
+    </ul>
+  </div>
+</label>
+<a class="index" href="home.html">Otthon</a>
+</html>
