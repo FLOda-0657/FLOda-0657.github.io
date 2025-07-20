@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FLOda</title>
+  <link rel="icon" href="https://i.ibb.co/JjW81LBW/IMG-20250709-WA0002.jpg" type="Galeriebild">
+  
   <style>
     body {
       background-color: black;
@@ -35,7 +37,15 @@
       color: turquoise;
       margin-left: 20px;
     }
+    
+    .home {
+      color: black;
+      background: turquoise;
+      display: flex;
+      justify-content: center;
+    }
   </style>
+  <a class="home" href="bealitas.html">Einstellungen</a>
   <h1 class="uberschrift"><marquee><u>Wilkommen!</u></marquee></h1>
     <p class="aktivition">Wähle eine Sache aus was du tun willstt und klick drauf</p>
     <header>
@@ -48,4 +58,4 @@
     <a href="info.html">Info über FLOda</a><br>
     </header>
     <p>Bald findest du mehr coole sachen hier!</p>
-</html>
+    </html>
