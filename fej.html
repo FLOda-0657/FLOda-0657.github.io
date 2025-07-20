@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLOda</title>
+<style>
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+body {
+  background-color: black;
+}
+.entwickler {
+  color: turquoise;
+}
+
+.bild {
+  color: turquoise;
+}
+
+.feedback {
+  color: turquoise;
+}
+
+.header {
+  color: turquoise;
+}
+
+.home {
+  color: black;
+  background: turquoise;
+}
+</style>
+</head>
+<body>
+
+<h2 class="entwickler">Fejlesztöröl:</h2>
+<p class="bild">Katincs a képre</p>
+
+<div class="container">
+  <img src="https://i.ibb.co/SDj0xBXY/IMG-20250709-WA0001.jpg" alt="Avatar" class="image">
+  <div class="overlay">
+    <div class="text">Flórán Buda Alex</div>
+  </div>
+</div>
+<p class="feedback">Van Neked kérdésed vagy Feedback? akkor írj egy Emailt: <em><u>floda.0657@gmail.com</u></em></p>
+<header>
+<a class="home" href="home.html">Otthon</a>
+</header>>
+</html>
