@@ -1,229 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    @import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
-    * {
-      box-sizing: border-box;
-    }
-    #app {
-      display: flex;
-      overflow: hidden;
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background-image: linear-gradient(red, green);
-    }
-    .butter-cheese-eggs {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-wrap: wrap;
-      width: 300px;
-      height: 300px;
-    }
-    .butter-cheese-eggs > div {
-      flex: 0 0 auto;
-      width: 100px;
-      height: 100px;
-    }
-    .butter-cheese-eggs > div .block {
-      cursor: pointer;
-      display: table-cell;
-      width: 100px;
-      height: 100px;
-      font: bold 50px/0 "Comic Sans MS", sans-serif;
-      vertical-align: middle;
-      text-align: center;
-    }
-    .butter-cheese-eggs > div:nth-child(1),
-    .butter-cheese-eggs > div:nth-child(2),
-    .butter-cheese-eggs > div:nth-child(3),
-    .butter-cheese-eggs > div:nth-child(4),
-    .butter-cheese-eggs > div:nth-child(5),
-    .butter-cheese-eggs > div:nth-child(6) {
-      border-bottom: 3px solid #fff;
-    }
-    .butter-cheese-eggs > div:nth-child(2),
-    .butter-cheese-eggs > div:nth-child(5),
-    .butter-cheese-eggs > div:nth-child(8) {
-      border-left: 3px solid #fff;
-      border-right: 3px solid #fff;
-    }
-    .butter-cheese-eggs span {
-      display: block;
-    }
-    .win {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(-10deg);
-      width: 300px;
-      height: 300px;
-      margin-top: -60px;
-      margin-left: -20px;
-      padding-top: 140px;
-      font-family: "Permanent Marker", cursive;
-      text-align: center;
-    }
-    .win h2 {
-      margin: 0 0 10px;
-      font-size: 100px;
-      text-shadow: 0px 0px 50px white;
-    }
-    .win button {
-      cursor: pointer;
-      transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      outline: none;
-      padding: 15px;
-      background-color: red;
-      border: none;
-      border-radius: 10px;
-      font-family: "Permanent Marker", cursive;
-      font-size: 20px;
-      color: white;
-    }
-    .win button:hover {
-      transform: scale(1.1);
+    body {
+      background: black;
     }
     
-    .home {
-      color: black;
-      background: red;
+    h1 {
+      color: turquoise;
+    }
+    
+    p {
+      color: turquoise;
+    }
+    
+    .link {
+      color: turquoise;
     }
   </style>
 </head>
-<body>
-  <a class="home" href="index.html">Home</a>
-  <div id="app">
-    <transition v-on:enter="enter" v-bind:css="false" appear>
-      <div class="butter-cheese-eggs" v-show="true">
-        <div v-for="(block, index) in grid" @click="select(index)">
-          <block :figure.sync="block.figure"></block>
-        </div>
-      </div>
-    </transition>
-
-    <transition v-on:enter="enterWin" v-bind:css="false">
-      <win v-show="winner" :click-handler="restart"></win>
-    </transition>
-  </div>
-
-  <template id="block">
-    <div class="block">
-      <transition v-on:enter="enter" v-bind:css="false">
-        <span v-show="figure > -1">{{ fig }}</span>
-      </transition>
-    </div>
-  </template>
-
-  <template id="win">
-    <div class="win">
-      <h2>Win</h2>
-      <button @click="clickHandler">Restart</button>
-    </div>
-  </template>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-
-  <script>
-    let state = {
-      grid: _.map(_.range(0, 9), index => ({ index, figure: -1 })),
-      myTurn: false
-    };
-
-    const appState = _.cloneDeep(state);
-
-    Vue.component('block', {
-      name: 'block',
-      template: '#block',
-      props: {
-        figure: {
-          type: Number,
-          default: -1
-        }
-      },
-      computed: {
-        fig() {
-          return this.figure === 0 ? 'O' : 'X';
-        }
-      },
-      methods: {
-        enter(el, done) {
-          TweenMax.from(el, 1, {
-            autoAlpha: 0,
-            scale: 0,
-            ease: Elastic.easeOut.config(1.25, 0.5),
-            onComplete: done
-          });
-        }
-      }
-    });
-
-    Vue.component('win', {
-      name: 'win',
-      template: '#win',
-      props: {
-        clickHandler: {
-          type: Function,
-          default: null
-        }
-      }
-    });
-
-    new Vue({
-      name: 'app',
-      el: '#app',
-      data() {
-        return state;
-      },
-      computed: {
-        winner() {
-          const wins = ['012', '036', '345', '147', '258', '678', '048', '246'];
-          const player = this.myTurn ? 0 : 1;
-          const moves = this.grid
-            .map((v, i) => (v.figure === player ? i : null))
-            .filter(i => i !== null);
-          return wins.some(win => {
-            const combo = win.split('').map(Number);
-            return combo.every(n => moves.includes(n));
-          });
-        }
-      },
-      methods: {
-        select(index) {
-          if (this.grid[index].figure > -1) return;
-          this.grid[index].figure = this.myTurn ? 1 : 0;
-          this.myTurn = !this.myTurn;
-        },
-        restart() {
-          this.grid = _.cloneDeep(appState.grid);
-          this.myTurn = appState.myTurn;
-        },
-        enter(el, done) {
-          TweenMax.from(el, 1, {
-            autoAlpha: 0,
-            scale: 0,
-            ease: Elastic.easeOut.config(1.25, 0.5),
-            onComplete: done
-          });
-        },
-        enterWin(el) {
-          TweenMax.from(el, 1, {
-            autoAlpha: 0,
-            scale: 0,
-            ease: Elastic.easeOut.config(1.25, 0.5)
-          });
-        }
-      }
-    });
-  </script>
-</body>
+  <body>
+    <h1>Nincs itt semmi...</h1>
+    <p>Mi dolgozunk egy új Játékon, Kérjünk türelmét, Köszönyünk.</p>
+    <a class="link" href="home.html">Otthon</a>
+  </body>
 </html>
